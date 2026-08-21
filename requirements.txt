@@ -1,0 +1,5 @@
+langmem
+langgraph
+langchain-groq
+langchain-google-genai
+ipykernel
