@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import os
 import uvicorn
 from uvicorn.config import LOGGING_CONFIG
 
@@ -24,10 +25,12 @@ def _build_log_config() -> dict:
 
 if __name__ == "__main__":
     settings = get_settings()
+    host = os.getenv("API_HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", str(settings.api_port)))
     uvicorn.run(
         "main:app",
-        host=settings.api_host,
-        port=settings.api_port,
+        host=host,
+        port=port,
         reload=False,
         log_config=_build_log_config(),
         log_level="info",

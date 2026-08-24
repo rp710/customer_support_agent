@@ -1,7 +1,6 @@
 from __future__ import annotations
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from fastapi.responses import RedirectResponse
 from customer_support_agent.api.routers import (
     drafts_router,
     knowledge_router,
@@ -26,9 +25,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app = FastAPI(title=resolve_settings.app_name,lifespan=lifespan)
 
     @app.get("/", include_in_schema=False)
-    def root() -> RedirectResponse:
-        """Send browser visits to the dashboard instead of returning an API 404."""
-        return RedirectResponse(url="http://localhost:8501", status_code=307)
+    def root() -> dict[str, str]:
+        """Return API links without redirecting cloud users to localhost."""
+        return {
+            "service": resolve_settings.app_name,
+            "health": "/health",
+            "docs": "/docs",
+        }
 
     app.include_router(health_router)
     app.include_router(knowledge_router)
