@@ -8,7 +8,7 @@ class DraftsRepository:
             cursor = conn.execute(
                 """
                 INSERT INTO drafts(ticket_id,content,context_used,status)
-                VALUES(?,?,?)
+                VALUES(?,?,?,?)
                 """,
                 (ticket_id,content,context_used,status),
             )

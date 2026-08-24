@@ -11,29 +11,31 @@ class Settings(BaseSettings):
     )
     app_name:str = "AI Copilot for Support Agents"
 
-    groq_api_key=""
-    groq_model:str = "openai/gpt-oss-120b"
-    llm_temperature:float = 0.2
+    groq_api_key: str = ""
+    groq_model: str = "openai/gpt-oss-120b"
+    llm_temperature: float = 0.2
 
-    openai_api_key = ""
-    google_api_key = ""
+    openai_api_key: str = ""
+    google_api_key: str = ""
 
-    workspace_dir:Path=Path(__file__).resolve().parents[2]
-    data_dir:Path=Path("data")
-    db_path:Path=Path("data/support.db")
-    chroma_rag_dir:Path=Path("data/chroma_rag")
-    chroma_mem0_dir:Path=Path("data/chroma_mem0")
-    knowledge_base_dir:Path=Path("knowledge_base")
+    workspace_dir: Path = Path(__file__).resolve().parents[2]
+    data_dir: Path = Path("data")
+    db_path: Path = Path("data/support.db")
+    chroma_rag_dir: Path = Path("data/chroma_rag")
+    chroma_mem0_dir: Path = Path("data/chroma_mem0")
+    knowledge_base_dir: Path = Path("knowledge_base")
 
-    rag_chunk_size:int = 800
-    rag_chunk_overlap:int = 120
-    rag_top_k:int = 4
-    mem0_top_k:int = 5
+    rag_chunk_size: int = 800
+    rag_chunk_overlap: int = 120
+    rag_top_k: int = 4
+    mem0_top_k: int = 5
 
-    api_host:str = "0.0.0.0"
-    api_port:str = 8000
+    # 0.0.0.0 is valid for server binding but invalid as a browser URL.
+    # Bind locally by default; deployments can override API_HOST in .env.
+    api_host: str = "127.0.0.1"
+    api_port: int = 8000
 
-    dashboard_api_url = "http://localhost:8000"
+    dashboard_api_url: str = "http://localhost:8000"
 
     def resolve(self,path:Path) -> Path:
         """Resolve relative paths against the project root"""

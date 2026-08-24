@@ -8,3 +8,11 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Local secrets and runtime configuration
+.env
+.env.*
+!.env.example
+
+# Local application data
+data/
