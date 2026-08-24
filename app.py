@@ -9,7 +9,21 @@ from typing import Any
 import requests
 import streamlit as st
 
-API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
+
+def _get_api_base_url() -> str:
+    configured_url = os.getenv("API_BASE_URL")
+    if configured_url:
+        return configured_url.rstrip("/")
+
+    try:
+        configured_url = st.secrets.get("API_BASE_URL")
+    except Exception:
+        configured_url = None
+
+    return (configured_url or "http://localhost:8000").rstrip("/")
+
+
+API_BASE_URL = _get_api_base_url()
 
 
 st.set_page_config(page_title="Insurance Claims Copilot", layout="wide")
