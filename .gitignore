@@ -16,3 +16,7 @@ wheels/
 
 # Local application data
 data/
+
+
+
+.pytest_cache/
